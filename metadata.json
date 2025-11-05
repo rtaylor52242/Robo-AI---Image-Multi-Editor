@@ -1,0 +1,5 @@
+{
+  "name": "Robo AI - Image Multi-Editor",
+  "description": "An AI-powered tool to generate multiple variations of an ad image from a single base image and a list of editing prompts. Features include style presets, aspect ratio exports, and bulk downloads.",
+  "requestFramePermissions": []
+}
