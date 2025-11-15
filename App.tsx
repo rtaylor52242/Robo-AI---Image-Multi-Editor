@@ -8,6 +8,8 @@ import { SparklesIcon } from './components/icons/SparklesIcon';
 import { ShareButtons } from './components/ShareButtons';
 import { ImageModal } from './components/ImageModal';
 import { ThemeToggle } from './components/ThemeToggle';
+import { HelpModal } from './components/HelpModal';
+import { QuestionMarkIcon } from './components/icons/QuestionMarkIcon';
 
 declare global {
   interface Window {
@@ -46,6 +48,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<GeneratedImage | null>(null);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -164,7 +167,14 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 sm:p-6 lg:p-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-8 relative">
-          <div className="absolute top-0 right-0">
+          <div className="absolute top-0 right-0 flex items-center gap-1">
+             <button
+              onClick={() => setIsHelpModalOpen(true)}
+              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              aria-label="Open help guide"
+            >
+              <QuestionMarkIcon className="w-6 h-6" />
+            </button>
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           </div>
           <div className="flex items-center justify-center gap-3">
@@ -213,6 +223,7 @@ const App: React.FC = () => {
         )}
       </div>
       <ImageModal image={selectedImage} onClose={closeImageModal} />
+      <HelpModal isOpen={isHelpModalOpen} onClose={() => setIsHelpModalOpen(false)} />
     </div>
   );
 };
